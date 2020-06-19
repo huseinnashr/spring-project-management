@@ -7,12 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import me.huseinnashr.pma.dao.EmployeeRepository;
 import me.huseinnashr.pma.dao.ProjectRepository;
 import me.huseinnashr.pma.entities.Employee;
 import me.huseinnashr.pma.entities.Project;
+
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -46,15 +46,8 @@ public class ProjectController {
   }
 
   @PostMapping(value = "/save")
-  public String createProject(Project project, @RequestParam List<Long> employees, Model model) {
+  public String createProject(Project project, Model model) {
     proRepo.save(project);
-
-    Iterable<Employee> chooseEmployees = empRepo.findAllById(employees);
-
-    for (Employee employee : chooseEmployees) {
-      employee.setProject(project);
-      empRepo.save(employee);
-    }
 
     return "redirect:./new";
   }
