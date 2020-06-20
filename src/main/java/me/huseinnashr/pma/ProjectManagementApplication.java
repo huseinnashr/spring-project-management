@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import me.huseinnashr.pma.dao.EmployeeRepository;
 import me.huseinnashr.pma.dao.ProjectRepository;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = { "me.huseinnashr.pma", "me.huseinnashr.utils" })
 public class ProjectManagementApplication {
 
 	@Autowired
