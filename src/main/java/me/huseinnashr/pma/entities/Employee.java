@@ -15,7 +15,7 @@ import javax.persistence.ManyToMany;
 @Entity
 public class Employee {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_seq")
   private long employeeId;
 
   private String firstName;
