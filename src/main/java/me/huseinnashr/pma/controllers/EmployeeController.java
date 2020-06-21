@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import me.huseinnashr.pma.dao.EmployeeRepository;
 import me.huseinnashr.pma.entities.Employee;
+import me.huseinnashr.pma.services.EmployeeService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class EmployeeController {
 
   @Autowired
-  EmployeeRepository empRepo;
+  EmployeeService empService;
 
   @GetMapping
   public String displayEmployees(Model model) {
-    List<Employee> employees = empRepo.findAll();
+    List<Employee> employees = empService.getAll();
     model.addAttribute("employees", employees);
 
     return "employees/list-employees";
@@ -40,7 +40,7 @@ public class EmployeeController {
 
   @PostMapping(value = "/save")
   public String createEmployee(Employee employee, Model model) {
-    empRepo.save(employee);
+    empService.save(employee);
 
     return "redirect:./new";
   }

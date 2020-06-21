@@ -8,10 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import me.huseinnashr.pma.dao.EmployeeRepository;
-import me.huseinnashr.pma.dao.ProjectRepository;
 import me.huseinnashr.pma.entities.Employee;
 import me.huseinnashr.pma.entities.Project;
+import me.huseinnashr.pma.services.EmployeeService;
+import me.huseinnashr.pma.services.ProjectService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -20,14 +20,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class ProjectController {
 
   @Autowired
-  ProjectRepository proRepo;
+  ProjectService proService;
 
   @Autowired
-  EmployeeRepository empRepo;
+  EmployeeService empService;
 
   @GetMapping
   public String displayprojects(Model model) {
-    List<Project> projects = proRepo.findAll();
+    List<Project> projects = proService.getAll();
     model.addAttribute("projects", projects);
 
     return "projects/list-projects";
@@ -39,7 +39,7 @@ public class ProjectController {
     Project project = new Project();
     model.addAttribute("project", project);
 
-    List<Employee> employees = empRepo.findAll();
+    List<Employee> employees = empService.getAll();
     model.addAttribute("allEmployees", employees);
 
     return "projects/new-project";
@@ -47,7 +47,7 @@ public class ProjectController {
 
   @PostMapping(value = "/save")
   public String createProject(Project project, Model model) {
-    proRepo.save(project);
+    proService.save(project);
 
     return "redirect:./new";
   }
