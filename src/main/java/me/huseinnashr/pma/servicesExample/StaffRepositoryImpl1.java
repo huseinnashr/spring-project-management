@@ -1,4 +1,4 @@
-package me.huseinnashr.pma.services;
+package me.huseinnashr.pma.servicesExample;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;

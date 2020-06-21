@@ -1,4 +1,4 @@
-package me.huseinnashr.pma.services;
+package me.huseinnashr.pma.servicesExample;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
