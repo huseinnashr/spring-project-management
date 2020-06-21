@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EmployeeService {
+public class EmployeeServiceExample {
 
   // // Field Injection
   // @Qualifier("staffRepositoryImpl2")
@@ -12,7 +12,7 @@ public class EmployeeService {
   IStaffRepository empRepo;
 
   // Constructor Injection
-  public EmployeeService(@Qualifier("staffRepositoryImpl2") IStaffRepository empRepo) {
+  public EmployeeServiceExample(@Qualifier("staffRepositoryImpl2") IStaffRepository empRepo) {
     this.empRepo = empRepo;
   }
 
