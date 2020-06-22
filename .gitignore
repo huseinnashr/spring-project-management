@@ -32,3 +32,4 @@ build/
 
 /keys/
 app.log
+.env

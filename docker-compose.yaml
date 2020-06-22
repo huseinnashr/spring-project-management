@@ -6,5 +6,21 @@ services:
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=${dbusername}
+      - POSTGRES_PASSWORD=${dbpassword}
+      - POSTGRES_DB=${dbname}
+    networks:
+      - postgres
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: postgres@postgres.org
+      PGADMIN_DEFAULT_PASSWORD: postgres
+    ports:
+      - "5433:80"
+    networks:
+      - postgres
+
+networks:
+  postgres:
+    driver: bridge
