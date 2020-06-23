@@ -3,12 +3,12 @@ package me.huseinnashr.pma.dao;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import me.huseinnashr.pma.dto.EmployeeProject;
 import me.huseinnashr.pma.entities.Employee;
 
-public interface EmployeeRepository extends CrudRepository<Employee, Long> {
+public interface EmployeeRepository extends PagingAndSortingRepository<Employee, Long> {
   @Override
   public List<Employee> findAll();
 
