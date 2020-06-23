@@ -9,19 +9,43 @@
     <div class="container">
       <form th:action="@{./save}" th:object="${employee}" method="POST">
         <input type="hidden" th:field="${employee.employeeId}" />
-        <input
-          type="text"
-          placeholder="First Name"
-          th:field="${employee.firstName}"
-        />
-        <input
-          type="text"
-          placeholder="Last Name"
-          th:field="${employee.lastName}"
-        />
-        <input type="email" placeholder="Email" th:field="${employee.email}" />
-
-        <button type="submit">Create Employee</button>
+        <div class="form-group">
+          <input
+            type="text"
+            placeholder="First Name"
+            th:field="${employee.firstName}"
+          />
+          <div
+            style="color: red;"
+            th:if="${#fields.hasErrors('firstName')}"
+            th:errors="${employee.firstName}"
+          ></div>
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            placeholder="Last Name"
+            th:field="${employee.lastName}"
+          />
+          <div
+            style="color: red;"
+            th:if="${#fields.hasErrors('lastName')}"
+            th:errors="${employee.lastName}"
+          ></div>
+        </div>
+        <div class="form-group">
+          <input
+            type="email"
+            placeholder="Email"
+            th:field="${employee.email}"
+          />
+          <div
+            style="color: red;"
+            th:if="${#fields.hasErrors('email')}"
+            th:errors="${employee.email}"
+          ></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Employee</button>
       </form>
     </div>
   </body>
