@@ -28,7 +28,7 @@ public class EmployeeService {
   }
 
   public Employee findByEmployeeId(long theId) {
-    return empRepo.findById(theId).orElse(null);
+    return empRepo.findById(theId).get();
   }
 
   public void delete(Employee theEmp) {

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import me.huseinnashr.pma.entities.Employee;
 import me.huseinnashr.pma.services.EmployeeService;
@@ -45,4 +46,17 @@ public class EmployeeController {
     return "redirect:./new";
   }
 
+  @GetMapping("/update")
+  public String displayEmployeeUpdateForm(@RequestParam("id") long id, Model model) {
+    Employee emp = empService.findByEmployeeId(id);
+    model.addAttribute("employee", emp);
+    return "employees/new-employee";
+  }
+
+  @GetMapping("/delete")
+  public String deleteEmployee(@RequestParam("id") long id, Model model) {
+    Employee emp = empService.findByEmployeeId(id);
+    empService.delete(emp);
+    return "redirect:/employees";
+  }
 }

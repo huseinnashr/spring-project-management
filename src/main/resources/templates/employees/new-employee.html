@@ -8,6 +8,7 @@
 
     <div class="container">
       <form th:action="@{./save}" th:object="${employee}" method="POST">
+        <input type="hidden" th:field="${employee.employeeId}" />
         <input
           type="text"
           placeholder="First Name"
