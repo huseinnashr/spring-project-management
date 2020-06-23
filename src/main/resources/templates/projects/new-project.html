@@ -8,33 +8,95 @@
 
     <div class="container">
       <form th:action="@{./save}" th:object="${project}" method="POST">
-        <input
-          type="text"
-          placeholder="Project Name"
-          th:field="${project.name}"
-        />
+        <div class="form-group">
+          <input
+            type="text"
+            placeholder="Project Name"
+            th:field="${project.name}"
+          />
+          <div
+            style="color: red;"
+            th:if="${#fields.hasErrors('name')}"
+            th:errors="${project.name}"
+          ></div>
+        </div>
+        <div class="form-group">
+          <select th:field="${project.stage}">
+            <option th:value="NOTSTARTED"> Not Started</option>
+            <option th:value="INPROGRESS"> In Progress</option>
+            <option th:value="COMPLETED"> Completed</option>
+          </select>
+          <div
+            style="color: red;"
+            th:if="${#fields.hasErrors('stage')}"
+            th:errors="${project.stage}"
+          ></div>
+        </div>
+        <div class="form-group">
+          <textarea
+            type="text"
+            placeholder="Enter Project Description"
+            th:field="${project.description}"
+          ></textarea>
+          <div
+            style="color: red;"
+            th:if="${#fields.hasErrors('description')}"
+            th:errors="${project.description}"
+          ></div>
+        </div>
+        <div class="form-group">
+          <select th:field="*{employees}" multiple="multiple">
+            <option
+              th:each="employee : ${allEmployees}"
+              th:value="${employee.employeeId}"
+              th:text="${employee.firstName}"
+            ></option>
+          </select>
+          <div
+            style="color: red;"
+            th:if="${#fields.hasErrors('employees')}"
+            th:errors="${project.employees}"
+          ></div>
+        </div>
+        <div class="form-group">
+          Start Date<br />
+          <input
+            id="dp3"
+            type="text"
+            class="mb-4 col-2 col-xs-4"
+            value="Start Date"
+            th:field="${project.startDate}"
+          />
 
-        <select th:field="${project.stage}">
-          <option th:value="NOTSTARTED"> Not Started</option>
-          <option th:value="INPROGRESS"> In Progress</option>
-          <option th:value="COMPLETED"> Completed</option>
-        </select>
+          <div
+            style="color: red;"
+            th:if="${#fields.hasErrors('startDate')}"
+            th:errors="${project.startDate}"
+          ></div>
+        </div>
 
-        <textarea
-          type="text"
-          placeholder="Enter Project Description"
-          th:field="${project.description}"
-        ></textarea>
-
-        <select th:field="*{employees}" multiple="multiple">
-          <option
-            th:each="employee : ${allEmployees}"
-            th:value="${employee.employeeId}"
-            th:text="${employee.firstName}"
-          ></option>
-        </select>
-
-        <button type="submit">Create Project</button>
+        <div class="form-group">
+          End Date<br />
+          <input
+            id="dp4"
+            type="text"
+            class="mb-4 col-2 col-xs-4"
+            value="End Date"
+            th:field="${project.endDate}"
+          />
+          <div
+            style="color: red;"
+            th:if="${#fields.hasErrors('endDate')}"
+            th:errors="${project.endDate}"
+          ></div>
+        </div>
+        <script type="text/javascript">
+          $("#dp3").datepicker();
+          $("#dp4").datepicker();
+        </script>
+        <button type="submit" class="btn btn-primary btn-sm">
+          Create Project
+        </button>
       </form>
     </div>
   </body>

@@ -1,6 +1,7 @@
 package me.huseinnashr.pma.entities;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,15 +13,27 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Project {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "project_seq")
   private long projectId;
+  @NotBlank(message = "Name cannot be empty")
   private String name;
+  @NotBlank(message = "Stage cannot be empty")
   private String stage;
+  @NotBlank(message = "Description cannot be empty")
   private String description;
+
+  // TODO: Fix String conversion to Date error for NotNull check
+  @NotNull(message = "Start date cannot be empty")
+  private Date startDate;
+
+  @NotNull(message = "End date cannot be empty")
+  private Date endDate;
 
   @ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH,
       CascadeType.PERSIST }, fetch = FetchType.LAZY)
@@ -81,5 +94,21 @@ public class Project {
       employees = new ArrayList<>();
     }
     employees.add(employee);
+  }
+
+  public Date getStartDate() {
+    return startDate;
+  }
+
+  public void setStartDate(Date startDate) {
+    this.startDate = startDate;
+  }
+
+  public Date getEndDate() {
+    return endDate;
+  }
+
+  public void setEndDate(Date endDate) {
+    this.endDate = endDate;
   }
 }
