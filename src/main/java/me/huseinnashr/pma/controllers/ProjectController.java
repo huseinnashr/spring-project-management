@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +14,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import me.huseinnashr.pma.dto.TimeChartData;
 import me.huseinnashr.pma.entities.Employee;
 import me.huseinnashr.pma.entities.Project;
 import me.huseinnashr.pma.services.EmployeeService;
@@ -61,4 +65,15 @@ public class ProjectController {
     return "redirect:./new";
   }
 
+  @GetMapping("/timelines")
+  public String displayProjectTimelines(Model model) throws JsonProcessingException {
+    List<TimeChartData> timelineData = proService.getTimeData();
+
+    ObjectMapper objectMapper = new ObjectMapper();
+    String jsonTimelineString = objectMapper.writeValueAsString(timelineData);
+
+    model.addAttribute("projectTimeList", jsonTimelineString);
+    System.out.println(jsonTimelineString);
+    return "projects/project-timelines";
+  }
 }
