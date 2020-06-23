@@ -31,6 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
+    http.authorizeRequests().antMatchers("/api/**").permitAll();
     http.authorizeRequests()
         .antMatchers("/projects/new", "/projects/save").hasRole("ADMIN")
         .antMatchers("/employees/new", "/employees/save").hasRole("ADMIN")
@@ -38,5 +39,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .antMatchers("/", "/**").authenticated()
         .and()
         .formLogin();
+    http.csrf().ignoringAntMatchers("/api/**");
   }
 }
